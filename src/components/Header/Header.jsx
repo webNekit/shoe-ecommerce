@@ -40,7 +40,7 @@ const Header = () => {
                     {genders.map((item, index) => {
                         return (
                             <li key={index} className="inline-flex">
-                                <Link href={"/genders/" + item.href} className="p-2 text-gray-600 hover:text-gray-600/50">{item.label}</Link>
+                                <Link href={"/products/" + item.href} className="p-2 text-gray-600 hover:text-gray-600/50">{item.label}</Link>
                             </li>
                         );
                     })}
