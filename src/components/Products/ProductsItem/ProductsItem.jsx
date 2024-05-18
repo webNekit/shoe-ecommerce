@@ -24,7 +24,7 @@ const ProductsItem = ({ className = null, data = null }) => {
                 </h4>
                 <ul className="flex items-center gap-1">
                   <li className="inline-flex">
-                    <Link href={'/product'} className="w-10 h-10 rounded-sm bg-gray-950 flex items-center justify-center text-white transition-colors duration-300 hover:bg-gray-300 hover:text-gray-950">
+                    <Link href={'/products/detail/' + 1} className="w-10 h-10 rounded-sm bg-gray-950 flex items-center justify-center text-white transition-colors duration-300 hover:bg-gray-300 hover:text-gray-950">
                       <Eye size={18} />
                     </Link>
                   </li>
