@@ -2,7 +2,7 @@
 const nextConfig = {
     reactStrictMode: true,
     images: {
-        domains: ['localhost']
+        domains: [process.env.NEXT_PUBLIC_STRAPI_API_URL, 'localhost', 'https://shoe-ecommerce-backend-wm0e.onrender.com', 'shoe-ecommerce-backend-wm0e.onrender.com']
     }
 };
 
