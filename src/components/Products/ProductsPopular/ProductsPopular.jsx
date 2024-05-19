@@ -8,7 +8,7 @@ const ProductsPopular = ({ className = null, data = null }) => {
         <Container>
             <div className="w-full flex flex-col gap-5">
                 <h2 className="text-3xl text-gray-950 font-semibold">Популярные товары</h2>
-                <ProductsItem data={''} />
+                <ProductsItem data={data} />
             </div>
         </Container>
     </section>

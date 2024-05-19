@@ -9,7 +9,7 @@ export const genders = [
     { label: "Детям", href: "children" }
 ];
 
-const Header = () => {
+const Header = ({ data = null }) => {
     return (
         <header className="w-full bg-white py-3 border-b border-gray-200" id="header">
             <Container>
