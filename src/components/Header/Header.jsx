@@ -1,12 +1,19 @@
 "use client";
 import Container from '@/layout/Container/Container'
 import Link from 'next/link'
-import React from 'react'
+import React, { useEffect } from 'react'
 import { ShoppingBag, Heart, Search } from 'lucide-react';
 import useCatalog from '@/hooks/Catalog/useCatalog';
+// kinde
+import { RegisterLink, LoginLink, LogoutLink } from "@kinde-oss/kinde-auth-nextjs/components";
+import { useKindeBrowserClient } from '@kinde-oss/kinde-auth-nextjs';
 
 const Header = ({ data = null }) => {
     const catalogs = useCatalog();
+    const { user } = useKindeBrowserClient();
+    useEffect(() => {
+        console.log(user);
+    }, [user])
     return (
         <header className="w-full bg-white py-3 border-b border-gray-200" id="header">
             <Container>
@@ -21,6 +28,20 @@ const Header = ({ data = null }) => {
                         <Link href={'/'} className="text-gray-900 text-3xl font-semibold">Kirani</Link>
                     </div>
                     <ul className="order-3 md:order-3 col-span-1 md:col-span-1 flex items-center justify-end gap-5">
+                        {user ?
+                            <li className="inline-flex">
+                                <LogoutLink>Выйти</LogoutLink>
+                            </li>
+                            :
+                            <>
+                                <li className="inline-flex">
+                                    <LoginLink>Войти</LoginLink>
+                                </li>
+                                <li className="inline-flex">
+                                    <RegisterLink>Зарегистрироваться</RegisterLink>
+                                </li>
+                            </>
+                        }
                         <li className="inline-flex">
                             <Link href={'/orders'} className="text-gray-500">
                                 <Heart size={18} />

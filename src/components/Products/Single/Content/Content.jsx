@@ -1,7 +1,14 @@
+"use client";
 import Container from '@/layout/Container/Container'
-import React from 'react'
+import React, { useEffect } from 'react'
+import { useKindeBrowserClient } from '@kinde-oss/kinde-auth-nextjs';
+
 
 const Content = ({ data }) => {
+    const { user } = useKindeBrowserClient();
+    useEffect(() => {
+        console.log(user);
+    }, [user])
     return (
         <section className="w-full py-10">
             <Container>
@@ -12,7 +19,12 @@ const Content = ({ data }) => {
                             <h2 className="text-gray-950 text-xl md:text-2xl font-medium">{data.attributes?.name}</h2>
                             <p className="text-lg">{data.attributes?.description}</p>
                         </div>
-                        <button className="bg-gray-950 text-center text-white text-lg font-medium px-4 py-4">Добавить в корзину</button>
+                        {user ?
+                            <>
+                                <button className="bg-gray-950 text-center text-white text-lg font-medium px-4 py-4">Добавить в корзину</button>
+                            </>
+                            : <>
+                            </>}
                     </div>
                     <div className="w-full flex flex-col items-start gap-5">
                         <h3 className="text-gray-700 text-xl">Размеры</h3>

@@ -1,10 +1,15 @@
 "use client";
 import Image from 'next/image'
 import Link from 'next/link'
-import React from 'react'
-import { Eye, Heart, Plus } from 'lucide-react'
+import React, { useEffect } from 'react'
+import { Eye, Heart, Plus } from 'lucide-react';
+import { useKindeBrowserClient } from '@kinde-oss/kinde-auth-nextjs';
 
 const ProductsItem = ({ data }) => {
+  const { user } = useKindeBrowserClient();
+  useEffect(() => {
+    console.log(user);
+  }, [user])
   return (
     <ul className={"grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 "}>
       {data.map((item, index) => {
@@ -30,16 +35,23 @@ const ProductsItem = ({ data }) => {
                       <Eye size={18} />
                     </Link>
                   </li>
-                  <li className="inline-flex">
-                    <button href={'/product'} className="w-10 h-10 rounded-sm bg-gray-950 flex items-center justify-center text-white transition-colors duration-300 hover:bg-gray-300 hover:text-gray-950">
-                      <Heart size={18} />
-                    </button>
-                  </li>
-                  <li className="inline-flex">
-                    <button href={'/product'} className="w-10 h-10 rounded-sm bg-gray-950 flex items-center justify-center text-white transition-colors duration-300 hover:bg-gray-300 hover:text-gray-950">
-                      <Plus size={18} />
-                    </button>
-                  </li>
+                  {user ?
+                    <>
+                      <li className="inline-flex">
+                        <button className="w-10 h-10 rounded-sm bg-gray-950 flex items-center justify-center text-white transition-colors duration-300 hover:bg-gray-300 hover:text-gray-950">
+                          <Heart size={18} />
+                        </button>
+                      </li>
+                      <li className="inline-flex">
+                        <button className="w-10 h-10 rounded-sm bg-gray-950 flex items-center justify-center text-white transition-colors duration-300 hover:bg-gray-300 hover:text-gray-950">
+                          <Plus size={18} />
+                        </button>
+                      </li>
+                    </>
+                    :
+                    <>
+                    </>
+                  }
                 </ul>
               </div>
             </div>

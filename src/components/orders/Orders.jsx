@@ -1,9 +1,16 @@
+"use client";
 import Container from '@/layout/Container/Container'
 import Image from 'next/image'
 import Link from 'next/link'
-import React from 'react'
+import React, { useEffect } from 'react'
+import { RegisterLink, LoginLink, LogoutLink } from "@kinde-oss/kinde-auth-nextjs/components";
+import { useKindeBrowserClient } from '@kinde-oss/kinde-auth-nextjs';
 
 const Orders = () => {
+    const { user } = useKindeBrowserClient();
+    useEffect(() => {
+        console.log(user);
+    }, [user])
     return (
         <section className="w-full py-10">
             <Container>
@@ -35,6 +42,28 @@ const Orders = () => {
                     <div className="col-span-12 order-1 md:order-2 md:col-span-5 border border-gray-200 p-5">
                         <div className="w-full pb-4 border-b border-gray-200">
                             <h3 className="text-gray-950 text-lg font-semibold text-center">Данные пользователя</h3>
+                        </div>
+                        <div className="w-full p-5">
+                            {user ?
+                                <>
+                                    <div className="w-full flex flex-col gap-2 items-center justify-center">
+                                        <h1 className='text-xl font-semibold text-gray-950'>{user.family_name} {user.given_name}</h1>
+                                        <span className='text-lg text-gray-500'>{user.email}</span>
+                                    </div>
+                                </>
+                                :
+                                <>
+                                    <ul className="flex items-center justify-center gap-5">
+                                        <li className="inline-flex">
+                                            <LoginLink>Войдите</LoginLink>
+                                        </li>
+                                        <li>/</li>
+                                        <li className="inline-flex">
+                                            <RegisterLink>Зарегистрируйтесь</RegisterLink>
+                                        </li>
+                                    </ul>
+                                </>
+                            }
                         </div>
                     </div>
                 </div>
