@@ -4,7 +4,7 @@ import Content from '@/components/Products/Single/Content/Content'
 import useDetailProduct from '@/hooks/Products/useDetailProduct'
 import React from 'react'
 
-export default function singleProductPage({ params }) {
+export default function SingleProductPage({ params }) {
   const productData = useDetailProduct(params.productId);
   return (
     <>
