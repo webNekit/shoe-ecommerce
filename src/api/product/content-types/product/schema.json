@@ -1,0 +1,80 @@
+{
+  "kind": "collectionType",
+  "collectionName": "products",
+  "info": {
+    "singularName": "product",
+    "pluralName": "products",
+    "displayName": "Товары"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string",
+      "required": true
+    },
+    "slug": {
+      "type": "uid",
+      "targetField": "name"
+    },
+    "description": {
+      "type": "richtext",
+      "required": true
+    },
+    "image": {
+      "allowedTypes": [
+        "images"
+      ],
+      "type": "media",
+      "multiple": false
+    },
+    "price": {
+      "type": "biginteger",
+      "required": true
+    },
+    "color": {
+      "type": "enumeration",
+      "enum": [
+        "Белый",
+        "Черный",
+        "Красный",
+        "Синий",
+        "Зеленый",
+        "Розовый",
+        "Коричневый",
+        "Оранжевый",
+        "Желтый",
+        "Серый"
+      ]
+    },
+    "isPopular": {
+      "type": "boolean"
+    },
+    "category": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::category.category",
+      "inversedBy": "products"
+    },
+    "brend": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::brand.brand",
+      "inversedBy": "products"
+    },
+    "gender": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::catalog.catalog",
+      "inversedBy": "products"
+    },
+    "sizes": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::size.size",
+      "mappedBy": "product"
+    }
+  }
+}

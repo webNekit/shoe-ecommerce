@@ -788,6 +788,246 @@ export interface PluginI18NLocale extends Schema.CollectionType {
   };
 }
 
+export interface ApiBrandBrand extends Schema.CollectionType {
+  collectionName: 'brands';
+  info: {
+    singularName: 'brand';
+    pluralName: 'brands';
+    displayName: '\u0411\u0440\u0435\u043D\u0434';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    name: Attribute.String & Attribute.Required;
+    products: Attribute.Relation<
+      'api::brand.brand',
+      'oneToMany',
+      'api::product.product'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::brand.brand',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::brand.brand',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiCatalogCatalog extends Schema.CollectionType {
+  collectionName: 'catalogs';
+  info: {
+    singularName: 'catalog';
+    pluralName: 'catalogs';
+    displayName: '\u041A\u0430\u0442\u0430\u043B\u043E\u0433';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    name: Attribute.String & Attribute.Required;
+    slug: Attribute.UID<'api::catalog.catalog', 'name'>;
+    products: Attribute.Relation<
+      'api::catalog.catalog',
+      'oneToMany',
+      'api::product.product'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::catalog.catalog',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::catalog.catalog',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiCategoryCategory extends Schema.CollectionType {
+  collectionName: 'categories';
+  info: {
+    singularName: 'category';
+    pluralName: 'categories';
+    displayName: '\u041A\u0430\u0442\u0435\u0433\u043E\u0440\u0438\u0438';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    name: Attribute.String & Attribute.Required;
+    slug: Attribute.UID<'api::category.category', 'name'> & Attribute.Required;
+    products: Attribute.Relation<
+      'api::category.category',
+      'oneToMany',
+      'api::product.product'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::category.category',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::category.category',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiOrderOrder extends Schema.CollectionType {
+  collectionName: 'orders';
+  info: {
+    singularName: 'order';
+    pluralName: 'orders';
+    displayName: '\u0417\u0430\u043A\u0430\u0437\u044B';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    user: Attribute.String;
+    tovaries: Attribute.Relation<
+      'api::order.order',
+      'oneToMany',
+      'api::product.product'
+    >;
+    price: Attribute.BigInteger;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::order.order',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::order.order',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiProductProduct extends Schema.CollectionType {
+  collectionName: 'products';
+  info: {
+    singularName: 'product';
+    pluralName: 'products';
+    displayName: '\u0422\u043E\u0432\u0430\u0440\u044B';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    name: Attribute.String & Attribute.Required;
+    slug: Attribute.UID<'api::product.product', 'name'>;
+    description: Attribute.RichText & Attribute.Required;
+    image: Attribute.Media;
+    price: Attribute.BigInteger & Attribute.Required;
+    color: Attribute.Enumeration<
+      [
+        '\u0411\u0435\u043B\u044B\u0439',
+        '\u0427\u0435\u0440\u043D\u044B\u0439',
+        '\u041A\u0440\u0430\u0441\u043D\u044B\u0439',
+        '\u0421\u0438\u043D\u0438\u0439',
+        '\u0417\u0435\u043B\u0435\u043D\u044B\u0439',
+        '\u0420\u043E\u0437\u043E\u0432\u044B\u0439',
+        '\u041A\u043E\u0440\u0438\u0447\u043D\u0435\u0432\u044B\u0439',
+        '\u041E\u0440\u0430\u043D\u0436\u0435\u0432\u044B\u0439',
+        '\u0416\u0435\u043B\u0442\u044B\u0439',
+        '\u0421\u0435\u0440\u044B\u0439'
+      ]
+    >;
+    isPopular: Attribute.Boolean;
+    category: Attribute.Relation<
+      'api::product.product',
+      'manyToOne',
+      'api::category.category'
+    >;
+    brend: Attribute.Relation<
+      'api::product.product',
+      'manyToOne',
+      'api::brand.brand'
+    >;
+    gender: Attribute.Relation<
+      'api::product.product',
+      'manyToOne',
+      'api::catalog.catalog'
+    >;
+    sizes: Attribute.Relation<
+      'api::product.product',
+      'oneToMany',
+      'api::size.size'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::product.product',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::product.product',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiSizeSize extends Schema.CollectionType {
+  collectionName: 'sizes';
+  info: {
+    singularName: 'size';
+    pluralName: 'sizes';
+    displayName: '\u0420\u0430\u0437\u043C\u0435\u0440\u044B';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    name: Attribute.String;
+    product: Attribute.Relation<
+      'api::size.size',
+      'manyToOne',
+      'api::product.product'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<'api::size.size', 'oneToOne', 'admin::user'> &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<'api::size.size', 'oneToOne', 'admin::user'> &
+      Attribute.Private;
+  };
+}
+
 declare module '@strapi/types' {
   export module Shared {
     export interface ContentTypes {
@@ -806,6 +1046,12 @@ declare module '@strapi/types' {
       'plugin::users-permissions.role': PluginUsersPermissionsRole;
       'plugin::users-permissions.user': PluginUsersPermissionsUser;
       'plugin::i18n.locale': PluginI18NLocale;
+      'api::brand.brand': ApiBrandBrand;
+      'api::catalog.catalog': ApiCatalogCatalog;
+      'api::category.category': ApiCategoryCategory;
+      'api::order.order': ApiOrderOrder;
+      'api::product.product': ApiProductProduct;
+      'api::size.size': ApiSizeSize;
     }
   }
 }
