@@ -3,7 +3,6 @@ import "./globals.css";
 import LayoutPage from "../layout/LayoutPage/LayoutPage";
 import Header from "../components/Header/Header";
 import Footer from "@/components/Footer/Footer";
-import { getCatalogProps } from "@/hooks/Catalog/getCatalog";
 
 const inter = Inter({ subsets: ["latin"] });
 
