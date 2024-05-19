@@ -15,6 +15,7 @@ const ProductsItem = ({ data }) => {
                 <span className="text-gray-400 text-sm">{item.attributes.category?.data?.attributes?.name}</span>
                 <h3 className="text-gray-950 text-lg font-semibold">{item.attributes.name}</h3>
               </div>
+              <img src={process.env.NEXT_PUBLIC_HOST_NAME + (item.attributes?.image?.data.attributes?.url ?? '')} alt="" />
               <div className="relative w-full h-72 bg-gray-200">
                 <Image fill src={process.env.NEXT_PUBLIC_HOST_NAME + (item.attributes?.image?.data.attributes?.url ?? '')} alt={'Изображение товара'} className="w-full h-full object-contain object-center" />
               </div>
