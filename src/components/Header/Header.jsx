@@ -1,15 +1,12 @@
+"use client";
 import Container from '@/layout/Container/Container'
 import Link from 'next/link'
 import React from 'react'
 import { ShoppingBag, Heart, Search } from 'lucide-react';
-
-export const genders = [
-    { label: "Мужчинам", href: "men" },
-    { label: "Женщинам", href: "women" },
-    { label: "Детям", href: "children" }
-];
+import useCatalog from '@/hooks/Catalog/useCatalog';
 
 const Header = ({ data = null }) => {
+    const catalogs = useCatalog();
     return (
         <header className="w-full bg-white py-3 border-b border-gray-200" id="header">
             <Container>
@@ -37,10 +34,10 @@ const Header = ({ data = null }) => {
                     </ul>
                 </div>
                 <ul className="pt-5 w-full flex items-center justify-center gap-5">
-                    {genders.map((item, index) => {
+                    {catalogs.map((item, index) => {
                         return (
                             <li key={index} className="inline-flex">
-                                <Link href={"/products/" + item.href} className="p-2 text-gray-600 hover:text-gray-600/50">{item.label}</Link>
+                                <Link href={"/products/" + item.attributes.slug} className="p-2 text-gray-600 hover:text-gray-600/50">{item.attributes.name}</Link>
                             </li>
                         );
                     })}

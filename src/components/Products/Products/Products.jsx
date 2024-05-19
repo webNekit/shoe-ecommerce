@@ -2,7 +2,7 @@ import Container from '@/layout/Container/Container'
 import React from 'react'
 import ProductsItem from '../ProductsItem/ProductsItem'
 
-const Products = ({ title = null }) => {
+const Products = ({ title = null, data }) => {
   return (
     <section className="w-full py-5 md:py-5">
         <Container>
@@ -33,7 +33,7 @@ const Products = ({ title = null }) => {
                     </select>
                 </div>
             </div>
-            <ProductsItem className={'pt-5'} />
+            <ProductsItem data={''} className={'pt-5'} />
         </Container>
     </section>
   )
