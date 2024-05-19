@@ -2,7 +2,7 @@
 const nextConfig = {
     reactStrictMode: true,
     images: {
-        domains: ['shoe-ecommerce-backend-wm0e.onrender.com', 'localhost']
+        domains: ['localhost']
     }
 };
 
