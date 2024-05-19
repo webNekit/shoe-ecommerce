@@ -4,7 +4,7 @@ import Container from '@/layout/Container/Container';
 import ProductsItem from '@/components/Products/ProductsItem/ProductsItem';
 import useGetProductsByCatalog from '@/hooks/Products/useGetProductsByCatalog';
 
-export default function gendersPage({ params }) {
+export default function GendersPage({ params }) {
   const productData = useGetProductsByCatalog(params.genderId)
   return (
     <>
