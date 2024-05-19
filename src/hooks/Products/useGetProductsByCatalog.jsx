@@ -1,24 +1,31 @@
 "use client";
 import { axiosClient } from '@/utils/GlobalApi';
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 
-const useGetProductsByCatalog = (param) => {
+const useGetProductsByCatalog = (genderId, filters) => {
     const [productData, setProductData] = useState([]);
 
     useEffect(() => {
+        const getProductByCatalog = async () => {
+            try {
+                let url = `products?filters[gender][slug][$in][0]=${genderId}`;
+                if (filters.category) url += `&filters[category][id][$in][1]=${filters.category}`;
+                if (filters.brand) url += `&filters[brend][id][$in][2]=${filters.brand}`;
+                if (filters.sort) url += `&sort[0]=price:${filters.sort}`;
+                url += '&populate=*';
+
+                const response = await axiosClient.get(url);
+                setProductData(response.data.data);
+                console.log(response.data.data);
+            } catch (error) {
+                console.error("Ошибка получения данных", error);
+            }
+        };
+
         getProductByCatalog();
-    }, [param])
+    }, [genderId, filters]);
 
-    const getProductByCatalog = () => {
-        axiosClient.get('products?filters[gender][slug][$in]=' + param + '&populate=*').then(resp => {
-            setProductData(resp.data.data);
-            console.log(resp.data.data);
-        }).catch(error => {
-            console.log("Ошибка получения данных", error);
-        })
-    }
     return productData;
-    // products?filters[gender][slug][$in]=men&populate=*
-}
+};
 
-export default useGetProductsByCatalog
+export default useGetProductsByCatalog;
