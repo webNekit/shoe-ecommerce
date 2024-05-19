@@ -2,12 +2,7 @@
 const nextConfig = {
     reactStrictMode: false,
     images: {
-        remotePatterns: [
-            {
-                protocol: "http",
-                hostname: "**"
-            }
-        ],
+        domains: ['shoe-ecommerce-backend-wm0e.onrender.com', 'localhost']
     }
 };
 
