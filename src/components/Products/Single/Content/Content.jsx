@@ -2,13 +2,29 @@
 import Container from '@/layout/Container/Container'
 import React, { useEffect } from 'react'
 import { useKindeBrowserClient } from '@kinde-oss/kinde-auth-nextjs';
+import { axiosClient } from '@/utils/GlobalApi';
 
 
 const Content = ({ data }) => {
     const { user } = useKindeBrowserClient();
     useEffect(() => {
         console.log(user);
-    }, [user])
+    }, [user]);
+    const handleAddToCart = async () => {
+        try {
+            const response = await axiosClient.post('/orders', {
+                data: {
+                    user: user.email,
+                    tovaries: [data.id], // Убедитесь, что ID товара передается как массив
+                    price: data.attributes.price,
+                },
+            });
+            alert('Товар добавлен в корзину');
+        } catch (error) {
+            console.error('Ошибка при добавлении товара в корзину:', error.response ? error.response.data : error.message);
+        }
+    };
+
     return (
         <section className="w-full py-10">
             <Container>
@@ -21,7 +37,7 @@ const Content = ({ data }) => {
                         </div>
                         {user ?
                             <>
-                                <button className="bg-gray-950 text-center text-white text-lg font-medium px-4 py-4">Добавить в корзину</button>
+                                <button onClick={handleAddToCart} className="bg-gray-950 text-center text-white text-lg font-medium px-4 py-4">Добавить в корзину</button>
                             </>
                             : <>
                             </>}

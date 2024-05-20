@@ -44,11 +44,6 @@ const Header = ({ data = null }) => {
                         }
                         <li className="inline-flex">
                             <Link href={'/orders'} className="text-gray-500">
-                                <Heart size={18} />
-                            </Link>
-                        </li>
-                        <li className="inline-flex">
-                            <Link href={'/orders'} className="text-gray-500">
                                 <ShoppingBag size={18} />
                             </Link>
                         </li>
