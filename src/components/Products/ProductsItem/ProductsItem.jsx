@@ -37,7 +37,6 @@ const ProductsItem = ({ data }) => {
                 <h3 className="text-gray-950 text-lg font-semibold">{item.attributes.name}</h3>
               </div>
               <div className="relative w-full h-72 bg-gray-200">
-                <img src={process.env.NEXT_PUBLIC_STRAPI_API_URL + item.attributes?.image?.data.attributes?.url} alt="" />
                 <Image fill src={process.env.NEXT_PUBLIC_STRAPI_API_URL + (item.attributes?.image?.data.attributes?.url ?? '')} alt={'Изображение товара'} className="w-full h-full object-contain object-center" />
               </div>
               <div className="w-full px-4 py-2 flex items-center justify-between">
